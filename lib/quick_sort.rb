@@ -9,28 +9,35 @@ class QuickSort
 
   # In-place.
   def self.sort2!(array, start = 0, length = array.length, &prc)
+    # debugger
+    # return if length <1
+    # idx = QuickSort.partition(array, start, length, &prc)
+    # array[idx], array[0] = array[0], array[idx] unless idx == 1
+    # QuickSort.sort2!(array, 0, idx, &prc)
+    # QuickSort.sort2!(array, idx+1, array.length - idx, &prc)
   end
 
   def self.partition(array, start, length, &prc)
     # debugger
-    barrier = start + 1
+    barrier = start
     length -= 1
+    size = length
+    pointer = start + 1
     while length > 0
-      # debugger
-      pointer = array.length - length
       if array[pointer] < array[start] 
-        array[barrier], array[pointer]  = array[pointer], array[barrier] if pointer != start + 1 
         barrier += 1
+        array[barrier], array[pointer]  = array[pointer], array[barrier] if pointer != start + 1 
         length -= 1
       else
         length -= 1
       end
+      pointer = pointer + 1
     end
-    return barrier - 1
+    return barrier
   end
 end
 
-# arr = [4,3,10,7,2,8,1]
-# barrier = QuickSort.partition(arr, 0, arr.length)
-# print(arr)
+arr = [4,3,10,7,2,8,1]
+QuickSort.sort2!(arr, 0, arr.length)
+print(arr)
 # puts(barrier)
